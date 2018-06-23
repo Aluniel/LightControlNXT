@@ -5,13 +5,18 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
-@XmlRootElement(name = "LightControlData")
 /** Contient l'ensemble des données à persister */
+@XmlRootElement(name = "LightControlData")
+@XmlType(propOrder = {"t1", "t2", "t3", "standardConfiguration", "currentConfiguration", "users"})
 public class Data {
 	
 	//
 	// FIELDS
 	//
+	
+	/** Instance pour le Singleton */
+	@XmlTransient
+	private static Data instance;
 	
 	/** Temporisation T1 en minutes */
 	@XmlElement(name = "T1")
@@ -40,7 +45,13 @@ public class Data {
 	// PROPERTIES
 	//
 	
+	/** @return Instance de l'objet contenant les données à persister */
+	public static Data getInstance() {
+		return instance;
+	}
+	
 	/** @return Temporisation T1 en minutes */
+	@XmlTransient()
 	public int getT1() {
 		return t1;
 	}
@@ -51,6 +62,7 @@ public class Data {
 	}
 	
 	/** @return Temporisation T2 en minutes */
+	@XmlTransient()
 	public int getT2() {
 		return t2;
 	}
@@ -61,6 +73,7 @@ public class Data {
 	}
 	
 	/** @return Temporisation T3 en minutes */
+	@XmlTransient()
 	public int getT3() {
 		return t3;
 	}
@@ -71,16 +84,19 @@ public class Data {
 	}
 	
 	/** @return Configuration standard */
+	@XmlTransient()
 	public Configuration getStandardConfiguration() {
 		return standardConfiguration;
 	}
 
 	/** @return Configuration courante */
+	@XmlTransient()
 	public Configuration getCurrentConfiguration() {
 		return currentConfiguration;
 	}
 
 	/** @return Liste des utilisateurs */
+	@XmlTransient()
 	public List<User> getUsers() {
 		return users;
 	}
@@ -89,8 +105,17 @@ public class Data {
 	// METHODS
 	//
 
+	/***/
 	public Data() {
-		
+		instance = this;
+	}
+	
+	/** Crée une instance par défault (destiné à la première utilisation de l'application ou à un reset complet des données) */
+	public static void createDefault() {
+		new Data();
+		getInstance().setT1(15);
+		getInstance().setT2(10);
+		getInstance().setT3(2);
 	}
 
 }

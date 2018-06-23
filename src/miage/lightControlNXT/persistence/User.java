@@ -1,48 +1,57 @@
 package miage.lightControlNXT.persistence;
 
+import javax.xml.bind.annotation.*;
+
+/***/
 public class User {
 	
 	//
 	// FIELDS
 	//
 	
-	/** Nom de l'utilisateur */
+	/** Nom prénom */
+	@XmlElement(name = "Login")
 	private String login;
-	/** Identifiant de l'utilisateur */
-	private String macAdress;
+	/** Adresse MAC */
+	@XmlElement(name = "MacAddress")
+	private String macAddress;
 	/** Administrateur ou utilisateur */
+	@XmlElement(name = "IsAdmin")
 	private boolean isAdmin;
 	
 	//
 	// PROPERTIES
 	//
 	
-	/***/
+	/** @return Nom de l'utilisateur */
+	@XmlTransient()
 	public String getLogin() {
 		return login;
 	}
 	
-	/***/
+	/** @param login Nom de l'utilisateur */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 	
-	/***/
-	public String getMacAdress() {
-		return macAdress;
+	/** @return Adresse MAC */
+	@XmlTransient()
+	public String getMacAddress() {
+		return macAddress;
 	}
 	
-	/***/
-	public void setMacAdress(String macAdress) {
-		this.macAdress = macAdress;
+	/** @param macAddress Adresse MAC */
+	public void setMacAddress(String macAddress) {
+		this.macAddress = macAddress;
 	}
 	
-	/***/
+	/** @return Administrateur ou utilisateur */
+	@XmlTransient()
 	public boolean isAdmin() {
 		return isAdmin;
 	}
 	
-	/***/
+	/** @param isAdmin Administrateur ou utilisateur */
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
@@ -52,12 +61,14 @@ public class User {
 	//
 	
 	/***/
-	public User(String Nom, String macAdress, boolean isAdmin) {
+	public User() {
 		
 	}
 	
 	/***/
-	public void serialize() {
-		
+	public User(String login, String macAdress, boolean isAdmin) {
+		this.login      = login;
+		this.macAddress = macAdress;
+		this.isAdmin    = isAdmin;
 	}
 }
