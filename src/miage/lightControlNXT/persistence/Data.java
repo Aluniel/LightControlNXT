@@ -117,5 +117,4 @@ public class Data {
 		getInstance().setT2(10);
 		getInstance().setT3(2);
 	}
-
 }
