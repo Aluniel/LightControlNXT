@@ -42,7 +42,7 @@ public class Data {
 	//
 	
 	/** @return Instance de l'objet contenant les données à persister */
-	public static Data getInstance() {
+	public static Data getData() {
 		if(instance == null)
 			createDefault();
 		return instance;
@@ -105,9 +105,9 @@ public class Data {
 	/** Crée une instance par défault (destiné à la première utilisation de l'application ou à un reset complet des données) */
 	public static void createDefault() {
 		new Data();
-		getInstance().setT1(15);
-		getInstance().setT2(10);
-		getInstance().setT3(2);
-		getInstance().standardConfiguration = Configuration.getDefault();
+		getData().setT1(15);
+		getData().setT2(10);
+		getData().setT3(2);
+		getData().standardConfiguration = Configuration.getDefault();
 	}
 }

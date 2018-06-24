@@ -36,7 +36,7 @@ public class Persistence {
 	public static void saveData(String output) throws JAXBException {
 		JAXBContext context = JAXBContext.newInstance(Data.class);
 		Marshaller marshaller = context.createMarshaller();
-		marshaller.marshal(Data.getInstance(), new File(output));
+		marshaller.marshal(Data.getData(), new File(output));
 	}
 
 }

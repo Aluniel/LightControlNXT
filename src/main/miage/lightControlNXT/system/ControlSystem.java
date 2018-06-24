@@ -17,7 +17,7 @@ public class ControlSystem extends ControlSystemInitializer {
 	//
 	
 	/** @return Instance de la classe */
-	public static ControlSystem getInstance() {
+	public static ControlSystem getControlSystem() {
 		return instance;
 	}
 	
