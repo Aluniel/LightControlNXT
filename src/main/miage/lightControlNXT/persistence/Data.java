@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.*;
 
 /** Contient l'ensemble des données à persister */
 @XmlRootElement(name = "LightControlData")
-@XmlType(propOrder = {"t1", "t2", "t3", "standardConfiguration", "currentConfiguration", "users"})
+@XmlType(propOrder = {"t1", "t2", "t3", "standardConfiguration", "users"})
 public class Data {
 	
 	//
@@ -32,10 +32,6 @@ public class Data {
 	@XmlElement(name = "StandardConfiguration")
 	private Configuration standardConfiguration;
 	
-	/** Configuration courante */
-	@XmlElement(name = "CurrentConfiguration")
-	private Configuration currentConfiguration;
-	
 	/** Liste des utilisateurs */
 	@XmlElementWrapper(name = "Users")
 	@XmlElement(name = "User")
@@ -47,6 +43,8 @@ public class Data {
 	
 	/** @return Instance de l'objet contenant les données à persister */
 	public static Data getInstance() {
+		if(instance == null)
+			createDefault();
 		return instance;
 	}
 	
@@ -89,12 +87,6 @@ public class Data {
 		return standardConfiguration;
 	}
 
-	/** @return Configuration courante */
-	@XmlTransient()
-	public Configuration getCurrentConfiguration() {
-		return currentConfiguration;
-	}
-
 	/** @return Liste des utilisateurs */
 	@XmlTransient()
 	public List<User> getUsers() {
@@ -116,5 +108,6 @@ public class Data {
 		getInstance().setT1(15);
 		getInstance().setT2(10);
 		getInstance().setT3(2);
+		getInstance().standardConfiguration = Configuration.getDefault();
 	}
 }
