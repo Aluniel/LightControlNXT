@@ -110,4 +110,14 @@ public class Data {
 		getData().setT3(2);
 		getData().standardConfiguration = Configuration.getDefault();
 	}
+	
+	/** @return utilisateur correspondant à l'adresse MAC spécifiée */
+	@XmlTransient()
+	public User getUserFromMACAdress(String macAddress) {
+		for(User user : users) {
+			if(user.getMacAddress() == macAddress)
+				return user;
+		}
+		return null;
+	}
 }

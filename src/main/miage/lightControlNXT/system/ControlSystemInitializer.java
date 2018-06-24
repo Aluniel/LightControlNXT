@@ -7,7 +7,8 @@ import lejos.nxt.SensorPort;
 import miage.lightControlNXT.input.ContactSensor;
 import miage.lightControlNXT.input.LightSensor;
 import miage.lightControlNXT.input.PresenceSensor;
-import miage.lightControlNXT.output.LightController;
+import miage.lightControlNXT.output.CeilingLight;
+import miage.lightControlNXT.output.DeskLight;
 import miage.lightControlNXT.persistence.Persistence;
 
 class ControlSystemInitializer {
@@ -40,9 +41,9 @@ class ControlSystemInitializer {
 	/** Capteur de luminosité */
 	private LightSensor lightSensor;
 	/** Plafonnier */
-	private LightController ceilingLight;
+	private CeilingLight ceilingLight;
 	/** Lampe de bureau */
-	private LightController deskLight;
+	private DeskLight deskLight;
 	
 	//
 	// PROPERTIES
@@ -64,12 +65,12 @@ class ControlSystemInitializer {
 	}
 
 	/** @return Plafonnier */
-	protected LightController getCeilingLight() {
+	public CeilingLight getCeilingLight() {
 		return ceilingLight;
 	}
 	
 	/** @return Lampe de bureau */
-	protected LightController getDeskLight() {
+	public DeskLight getDeskLight() {
 		return deskLight;
 	}
 	
@@ -93,8 +94,8 @@ class ControlSystemInitializer {
 	
 	/** Initialise les lampes */
 	public void initializeLights() {
-		ceilingLight = new LightController(ceilingLightPort);
-		deskLight 	 = new LightController(deskLightPort);
+		ceilingLight = new CeilingLight(ceilingLightPort);
+		deskLight 	 = new DeskLight(deskLightPort);
 	}
 	
 	/** Charge les données à partir du fichier de sauvegarde s'il existe */

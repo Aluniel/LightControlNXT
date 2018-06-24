@@ -1,5 +1,7 @@
 package miage.lightControlNXT.persistence;
 
+import static miage.lightControlNXT.system.ControlSystem.getControlSystem;
+
 import javax.xml.bind.annotation.XmlElement;
 
 public class Configuration {
@@ -60,5 +62,11 @@ public class Configuration {
 		conf.setDeskLightOn(false);
 		conf.setCeilingLightIntensity(0);
 		return conf;
+	}
+	
+	/** Applique la configuration */
+	public void Apply() {
+		getControlSystem().getCeilingLight().setIntensity(ceilingLightIntensity);
+		getControlSystem().getDeskLight().setIsLightOn(isDeskLightOn);
 	}
 }

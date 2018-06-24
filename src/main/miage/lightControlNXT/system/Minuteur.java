@@ -92,5 +92,4 @@ public class Minuteur {
 	public static void cancelT3() {
 		timerT3.cancel();
 	}
-
 }
