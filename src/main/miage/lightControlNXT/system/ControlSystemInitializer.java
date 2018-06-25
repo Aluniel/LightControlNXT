@@ -27,8 +27,6 @@ class ControlSystemInitializer {
 	private final MotorPort ceilingLightPort = MotorPort.A;
 	/** Port de la lampe de bureau */
 	private final MotorPort deskLightPort = MotorPort.B;
-	/** Fichier de sauvegarde des données */
-	private final String dataFile = "LightControlData.xml";
 	
 	//
 	// FIELDS

@@ -16,7 +16,6 @@ public class Data {
 	//
 	
 	/** Instance pour le Singleton */
-	@XmlTransient
 	private static Data instance;
 	
 	/** Temporisation T1 en minutes */
@@ -118,7 +117,6 @@ public class Data {
 	}
 	
 	/** @return utilisateur correspondant à l'adresse MAC spécifiée */
-	@XmlTransient()
 	public User getUserFromMACAdress(String macAddress) {
 		for(User user : users) {
 			if(user.getMacAddress() == macAddress)

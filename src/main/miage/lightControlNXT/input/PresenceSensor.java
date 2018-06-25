@@ -30,5 +30,4 @@ public class PresenceSensor implements Runnable {
 			}
 		}
 	}
-
 }

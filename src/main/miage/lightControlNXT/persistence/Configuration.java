@@ -3,6 +3,7 @@ package miage.lightControlNXT.persistence;
 import static miage.lightControlNXT.system.ControlSystem.getControlSystem;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 public class Configuration {
 	
@@ -22,6 +23,7 @@ public class Configuration {
 	//
 	
 	/** @return Etat de la lampe de bureau */
+	@XmlTransient()
 	public boolean isDeskLightOn() {
 		return isDeskLightOn;
 	}
@@ -32,6 +34,7 @@ public class Configuration {
 	}
 	
 	/** @return Etat du plafonnier */
+	@XmlTransient()
 	public int getCeilingLightIntensity() {
 		return ceilingLightIntensity;
 	}
