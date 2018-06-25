@@ -7,6 +7,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.IllegalFormatException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -31,10 +33,31 @@ public class User implements Runnable {
 	private volatile boolean isAdmin;
 	/** Thread de communication avec le client */
 	@XmlTransient()
-	private Thread comm;
+	private Thread tListen;
+	/** Thread de communication avec le client */
+	@XmlTransient()
+	private volatile Timer tSend;
 	/** Connection NXT */
 	@XmlTransient()
 	private volatile NXTConnection connection;
+	/***/
+	@XmlTransient()
+	private TimerTask sendData = new TimerTask() {
+		
+		@Override
+		public void run() {
+			DataOutputStream output = connection.openDataOutputStream();
+			if(isAdmin()) {
+				// TODO
+			} else {
+				try {
+					output.writeUTF(Boolean.toString(getControlSystem().getDeskLight().getIsLightOn()) + ";" + Integer.toString(getControlSystem().getCeilingLight().getIntensity()));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	};
 	
 	//
 	// PROPERTIES
@@ -92,9 +115,11 @@ public class User implements Runnable {
 	/** Démarre un thread de communication avec l'utilisateur */
 	public void connect(NXTConnection connection) {
 		this.connection = connection;
-		comm = new Thread(this);
-		comm.setDaemon(true);
-		comm.start();
+		tListen = new Thread(this);
+		tListen.setDaemon(true);
+		tListen.start();
+		tSend = new Timer();
+		tSend.schedule(sendData, 50, 500);
 	}
 
 	/** Thread d'écoute de l'utilisateur */
