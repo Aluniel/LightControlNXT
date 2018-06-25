@@ -3,6 +3,7 @@ package miage.lightControlNXT.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.*;
 
 /** Contient l'ensemble des données à persister */
@@ -100,6 +101,11 @@ public class Data {
 	/***/
 	public Data() {
 		instance = this;
+		try {
+			Persistence.saveData();
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/** Crée une instance par défault (destiné à la première utilisation de l'application ou à un reset complet des données) */

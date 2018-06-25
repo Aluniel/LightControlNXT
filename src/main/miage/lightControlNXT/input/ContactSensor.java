@@ -2,7 +2,9 @@ package miage.lightControlNXT.input;
 
 import lejos.nxt.SensorPort;
 import lejos.nxt.TouchSensor;
+import miage.lightControlNXT.system.EtatPiece;
 
+import static miage.lightControlNXT.system.ControlSystem.getControlSystem;
 public class ContactSensor implements Runnable {
 	
 	//
@@ -40,9 +42,7 @@ public class ContactSensor implements Runnable {
 		while(!stop) {
 			if(lastState != isPressed()) {
 				if(isPressed()) {
-					// TODO
-				} else {
-					// TODO
+					getControlSystem().setEtatPiece(EtatPiece.unknown);
 				}
 				lastState = isPressed();
 			}

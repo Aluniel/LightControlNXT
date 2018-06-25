@@ -12,12 +12,15 @@ import javax.xml.bind.Unmarshaller;
  */
 public class Persistence {
 	
+	/** Emplacement du fichier de données */
+	private static String fileData = "LightControlData.xml";
+	
 	/**
 	 * Charge les données
 	 * @throws JAXBException 
 	 */
-	public static void loadData(String input) throws JAXBException {
-		File fileInput = new File(input);
+	public static void loadData() throws JAXBException {
+		File fileInput = new File(fileData);
 
 		if(fileInput.exists()) {
 			JAXBContext context = JAXBContext.newInstance(Data.class);
@@ -33,10 +36,10 @@ public class Persistence {
 	 * Enregistre les données
 	 * @throws JAXBException 
 	 */
-	public static void saveData(String output) throws JAXBException {
+	public static void saveData() throws JAXBException {
 		JAXBContext context = JAXBContext.newInstance(Data.class);
 		Marshaller marshaller = context.createMarshaller();
-		marshaller.marshal(Data.getData(), new File(output));
+		marshaller.marshal(Data.getData(), new File(fileData));
 	}
 
 }

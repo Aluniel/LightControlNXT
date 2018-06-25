@@ -1,6 +1,6 @@
 package miage.lightControlNXT.system;
 
-enum EtatPiece {
+public enum EtatPiece {
 	/** La pièce est occupée */
 	occupied,
 	/** La pièce est vide */

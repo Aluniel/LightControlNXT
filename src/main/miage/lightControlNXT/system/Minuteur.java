@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import static miage.lightControlNXT.persistence.Data.getData;
 
+import static miage.lightControlNXT.system.ControlSystem.getControlSystem;
 public class Minuteur {
 	
 	//
@@ -22,7 +23,7 @@ public class Minuteur {
 	private static TimerTask taskT1 = new TimerTask() {
 		@Override
 		public void run() {
-			// TODO
+			getControlSystem().keepCurrentConfiguration = false;
 		}
 	};
 	
@@ -30,7 +31,7 @@ public class Minuteur {
 	private static TimerTask taskT2 = new TimerTask() {
 		@Override
 		public void run() {
-			// TODO
+			getControlSystem().setEtatPiece(EtatPiece.empty);
 		}
 	};
 	
@@ -38,7 +39,8 @@ public class Minuteur {
 	private static TimerTask taskT3 = new TimerTask() {
 		@Override
 		public void run() {
-			// TODO
+			getControlSystem().setEtatPiece(EtatPiece.empty);
+			cancelT2();
 		}
 	};
 	
@@ -80,6 +82,11 @@ public class Minuteur {
 	public static void startT2() {
 		timerT2.cancel();
 		timerT2.schedule(taskT2, getT2InMs());
+	}
+	
+	/** Annule le minuteur T3 */
+	public static void cancelT2() {
+		timerT2.cancel();
 	}
 	
 	/** Démarre ou redémarre le minuteur T3 */

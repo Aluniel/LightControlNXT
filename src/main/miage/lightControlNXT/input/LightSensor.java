@@ -1,6 +1,7 @@
 package miage.lightControlNXT.input;
 
 import lejos.nxt.ColorSensor;
+import static miage.lightControlNXT.system.ControlSystem.getControlSystem;
 import lejos.nxt.SensorPort;
 
 /** Capteur de luminosité */
@@ -28,7 +29,9 @@ public class LightSensor implements Runnable {
 		int lastLuminosity = getLuminosity();
 		while(true) {
 			if(lastLuminosity != getLuminosity()) {
-				// TODO
+				if(getLuminosity() > 10) {
+					getControlSystem().turnLightOff(true);
+				}
 			}
 		}
 	}

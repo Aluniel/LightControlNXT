@@ -86,22 +86,22 @@ class ControlSystemInitializer {
 	}
 	
 	/** Initialise les capteurs */
-	public void initializeSensors() {
+	private void initializeSensors() {
 		lightSensor     = new LightSensor(lightSensorPort);
 		contactSensor   = new ContactSensor(contactSensorPort);
 		presenceSensor  = new PresenceSensor(presenceSensorPort);
 	}
 	
 	/** Initialise les lampes */
-	public void initializeLights() {
+	private void initializeLights() {
 		ceilingLight = new CeilingLight(ceilingLightPort);
 		deskLight 	 = new DeskLight(deskLightPort);
 	}
 	
 	/** Charge les données à partir du fichier de sauvegarde s'il existe */
-	public void loadData() {
+	private void loadData() {
 		try {
-			Persistence.loadData(dataFile);
+			Persistence.loadData();
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

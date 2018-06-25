@@ -3,6 +3,9 @@ package miage.lightControlNXT.input;
 
 import lejos.nxt.SensorPort;
 import lejos.nxt.SoundSensor;
+import miage.lightControlNXT.system.EtatPiece;
+
+import static miage.lightControlNXT.system.ControlSystem.getControlSystem;
 
 public class PresenceSensor implements Runnable {
 	
@@ -23,7 +26,7 @@ public class PresenceSensor implements Runnable {
 	public void run() {
 		while(true) {
 			if(isMovementDetected()) {
-				// TODO
+				getControlSystem().setEtatPiece(EtatPiece.occupied);
 			}
 		}
 	}
